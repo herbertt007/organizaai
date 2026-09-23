@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Lista</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+<div class="container">
+<h1>Lista de Tarefas</h1>
+
+<p class="logo">ORGANIZA ai</p>
+
+<a href="{% url 'cria_tarefa' %}">Criar Nova Tarefa</a>
+
+<ul>
+    {% for t in tarefas %}
+        <li>
+            <strong>{{ t.titulo }}</strong> - {% if t.concluida %}Concluída{% else %}Pendente{% endif %}
+            <br>
+            <a href="{% url 'detalhe_tarefa' t.pk %}">Ver Detalhes</a> |
+            <a href="{% url 'edita_tarefa' t.pk %}">Editar</a> |
+            <a href="{% url 'deleta_tarefa' t.pk %}">Excluir</a>
+        </li>
+    {% empty %}
+        <li>Nenhuma tarefa encontrada.</li>
+    {% endfor %}
+</ul>
+</div>
+</body>
+</html>

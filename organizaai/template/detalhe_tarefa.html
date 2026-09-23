@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Lista</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+<div class="container">
+<h1>Detalhes da Tarefa</h1>
+<p><strong>Título:</strong> {{ object.titulo }}</p>
+<p><strong>Descrição:</strong> {{ object.descricao }}</p>
+<p><strong>Data de criação:</strong> {{ object.data }}</p>
+{% if object.data_alteracao|date:"U" != object.data|date:"U" %}
+<p><strong>Última alteração:</strong> {{ object.data_alteracao|date:"d/m/Y H:i" }}</p>
+{% endif %}
+<p><strong>Status:</strong> {% if object.concluida %}Concluída{% else %}Pendente{% endif %}</p>
+
+<a href="{% url 'edita_tarefa' object.pk %}">Editar</a> | 
+<a href="{% url 'lista_tarefas' %}">Voltar para a lista</a>
+</div>
+
+</body>
+</html>
